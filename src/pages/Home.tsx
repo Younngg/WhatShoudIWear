@@ -9,15 +9,18 @@ import Header from './../components/Header/Header';
 import AuthService from './../service/authService';
 import { User, UserCredential } from 'firebase/auth';
 import TodayWeather from '../components/TodayWeather/TodayWeather';
+import useClothes from './../hooks/useClothes';
 
 const postRepository = new PostRepository();
 const authService = new AuthService();
 
 const Home = () => {
+  const clothes = useClothes();
+
   const [posts, setPosts] = useState<Posts>({});
   const [filteredPosts, setFilteredPosts] = useState<Posts | false>(false);
 
-  const [allHashtags, setAllHashtags] = useState<any>([]);
+  const [allHashtags, setAllHashtags] = useState<any>(clothes);
   const [allDates, setAllDates] = useState<string[] | []>([]);
   const [userId, setUserId] = useState<string>('');
 

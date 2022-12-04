@@ -116,15 +116,19 @@ const ClothesTag: React.FC<ClothesTagProps> = ({
       </div>
       <span>{error}</span>
       <div className='border rounded all-tag-box w-100 d-flex align-items-self flex-wrap'>
-        {allHashtags.map((tag, index) => (
-          <div
-            key={index}
-            className='me-2 border rounded-pill px-3 py-1 hashtag-button btn-outline-info btn'
-            onClick={onClickHashtag}
-          >
-            {tag}
-          </div>
-        ))}
+        {allHashtags
+          .sort((a, b) => {
+            return a.localeCompare(b);
+          })
+          .map((tag, index) => (
+            <div
+              key={index}
+              className='me-2 border rounded-pill px-3 py-1 hashtag-button btn-outline-info btn'
+              onClick={onClickHashtag}
+            >
+              {tag}
+            </div>
+          ))}
       </div>
     </>
   );
