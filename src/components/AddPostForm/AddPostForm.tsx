@@ -11,11 +11,13 @@ const hashtagRepository = new HashtagRepository();
 interface AddPostFormProps {
   postRepository: PostRepository;
   allHashtags: string[] | [];
+  userId: string;
 }
 
 const AddPostForm: React.FC<AddPostFormProps> = ({
   postRepository,
   allHashtags,
+  userId,
 }) => {
   const [weather, setWeather] = useState<any>({
     weather: '',
@@ -25,8 +27,9 @@ const AddPostForm: React.FC<AddPostFormProps> = ({
   const [hashArr, setHashArr] = useState<string[] | []>([]);
   const [error, setError] = useState('');
 
-  const cityRef = useRef<HTMLSelectElement>(null);
-  const weatherRef = useRef<HTMLSelectElement>(null);
+  const cityRef = useRef<HTMLSelectElement | null>(null);
+  const weatherRef = useRef<HTMLSelectElement | null>(null);
+  const dateRef = useRef<HTMLInputElement | null>(null);
 
   // 날씨 정보 get
   useEffect(() => {
@@ -45,23 +48,21 @@ const AddPostForm: React.FC<AddPostFormProps> = ({
 
   const onSubmitPost: ComponentProps<'form'>['onSubmit'] = (e) => {
     e.preventDefault();
-    if (
-      !hashArr.length ||
-      !tempInput ||
-      (cityRef.current && cityRef.current.value === '시/도')
-    ) {
+    if (!hashArr.length || !tempInput) {
       setError('전체 항목을 입력해주세요');
       return;
-    } else if (cityRef.current && weatherRef.current) {
-      const date = new Date();
+    } else if (cityRef.current && cityRef.current.value === 'none') {
+      setError('지역을 입력해주세요');
+      return;
+    } else if (cityRef.current && weatherRef.current && dateRef.current) {
       const post = {
         id: Date.now(),
         hashtag: hashArr,
         city: cityRef.current.value,
         weather: weatherRef.current.value,
         temp: tempInput,
-        date: date.toLocaleDateString('ko-kr'),
-        userId: '',
+        date: dateRef.current.value,
+        userId: userId,
       };
       postRepository.savePost(post);
       setHashArr([]);
@@ -69,12 +70,23 @@ const AddPostForm: React.FC<AddPostFormProps> = ({
     }
   };
 
+  function getToday() {
+    var date = new Date();
+    var year = date.getFullYear();
+    var month = ('0' + (1 + date.getMonth())).slice(-2);
+    var day = ('0' + date.getDate()).slice(-2);
+    return year + '-' + month + '-' + day;
+  }
+
   return (
     <Form className='add-post-form mb-5' onSubmit={onSubmitPost}>
       <div className='d-flex mb-3'>
+        <div>
+          <Form.Control type='date' defaultValue={getToday()} ref={dateRef} />
+        </div>
         <div className='col-sm-1.5'>
           <Form.Select ref={cityRef}>
-            <option value='시/도'>시/도</option>
+            <option value='none'>지역</option>
             <option value='강원도'>강원도</option>
             <option value='경기도'>경기도</option>
             <option value='경상남도'>경상남도</option>
@@ -98,7 +110,7 @@ const AddPostForm: React.FC<AddPostFormProps> = ({
           <Form.Control
             type='number'
             placeholder='기온'
-            value={tempInput}
+            defaultValue={tempInput}
             onChange={onChangeTempInput}
           />
         </div>

@@ -1,13 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import Header from './components/Header/Header';
-import Board from './pages/Board';
+import Home from './pages/Home';
 
 function App() {
   return (
     <div className='App'>
-      <Header />
-      <Board />
+      <Home />
     </div>
   );
 }

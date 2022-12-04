@@ -10,8 +10,9 @@ import {
 import { firebaseApp } from './firebase';
 
 export interface Post {
+  [index: string]: any;
   city: string;
-  id: number | string;
+  id: string;
   temp: number;
   userId: any;
   weather: string;
