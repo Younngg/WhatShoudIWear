@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/WhatShoudIWear/static/css/main.a757b313.css",
+    "main.js": "/WhatShoudIWear/static/js/main.1aa9ae38.js",
+    "index.html": "/WhatShoudIWear/index.html",
+    "main.a757b313.css.map": "/WhatShoudIWear/static/css/main.a757b313.css.map",
+    "main.1aa9ae38.js.map": "/WhatShoudIWear/static/js/main.1aa9ae38.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a757b313.css",
+    "static/js/main.1aa9ae38.js"
+  ]
+}
