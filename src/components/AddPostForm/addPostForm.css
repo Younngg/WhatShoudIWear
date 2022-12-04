@@ -1,0 +1,7 @@
+.add-post-form .form-select,
+.add-post-form .form-control {
+  font-size: 0.9rem;
+}
+.add-post-form div {
+  margin-right: 1rem;
+}

@@ -1,0 +1,14 @@
+.delete-tag-btn {
+  font-size: 0.75rem;
+}
+.all-tag-box {
+  min-height: 80px;
+  padding-top: 6px;
+  padding-left: 12px;
+  flex-wrap: wrap;
+}
+.all-tag-box .hashtag-button {
+  height: fit-content;
+  cursor: pointer;
+  font-size: 0.9rem;
+}

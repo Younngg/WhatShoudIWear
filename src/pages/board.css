@@ -1,0 +1,15 @@
+.date-filter {
+  width: 100px;
+  display: inline-block;
+}
+
+.board-table {
+  text-align: center;
+}
+
+.date-th,
+.city-th,
+.temp-th,
+.del-th {
+  width: 10%;
+}
