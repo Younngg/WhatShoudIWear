@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import Board from './../components/Board/Board';
 import AddPostForm from './../components/AddPostForm/AddPostForm';
-import PostRepository from '../service/postsRepository';
+import PostRepository, { Posts } from '../service/postsRepository';
 import Filter from './../components/Filter/Filter';
 import { Post } from './../service/postsRepository';
 import Header from './../components/Header/Header';
@@ -13,8 +13,10 @@ const postRepository = new PostRepository();
 const authService = new AuthService();
 
 const Home = () => {
+  const [posts, setPosts] = useState<Posts>({});
+  const [filteredPosts, setFilteredPosts] = useState<Posts | false>(false);
+
   const [allHashtags, setAllHashtags] = useState<any>([]);
-  const [posts, setPosts] = useState({});
   const [allDates, setAllDates] = useState<string[] | []>([]);
   const [userId, setUserId] = useState<string>('');
 
@@ -37,7 +39,7 @@ const Home = () => {
       });
     });
   }, []);
-  console.log(userId);
+
   useEffect(() => {
     authService.onAuthChange((user: User) => {
       if (user) {
@@ -67,6 +69,8 @@ const Home = () => {
     authService.logout();
   };
 
+  console.log(filteredPosts);
+
   return (
     <Container>
       <Header onLogin={onLogin} onLogout={onLogout} userId={userId} />
@@ -75,13 +79,17 @@ const Home = () => {
         allHashtags={allHashtags}
         userId={userId}
       />
-      <Filter dates={allDates} setPosts={setPosts} />
+      <Filter
+        dates={allDates}
+        setFilteredPosts={setFilteredPosts}
+        posts={posts}
+      />
       <Board
-        postRepository={postRepository}
         setAllHashtags={setAllHashtags}
         posts={posts}
         onDeletePost={onDeletePost}
         userId={userId}
+        filteredPosts={filteredPosts}
       />
     </Container>
   );

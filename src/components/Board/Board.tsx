@@ -3,23 +3,24 @@ import { Table } from 'react-bootstrap';
 import Post from '../Post/Post';
 import PostRepository, {
   Post as PostInterface,
+  Posts,
 } from '../../service/postsRepository';
 import './board.css';
 import Filter from './../Filter/Filter';
 
 interface BoardProps {
-  postRepository: PostRepository;
   setAllHashtags: React.Dispatch<any>;
-  posts: any;
+  posts: Posts;
   onDeletePost: (post: PostInterface) => void;
   userId: string;
+  filteredPosts: any;
 }
 
 const Board: React.FC<BoardProps> = ({
   posts,
-  postRepository,
   onDeletePost,
   userId,
+  filteredPosts,
 }) => {
   return (
     <>
@@ -35,21 +36,37 @@ const Board: React.FC<BoardProps> = ({
           </tr>
         </thead>
         <tbody>
-          {Object.keys(posts)
-            .sort((a, b) => {
-              return (
-                new Date(posts[b]['date']).valueOf() -
-                new Date(posts[a]['date']).valueOf()
-              );
-            })
-            .map((key: any) => (
-              <Post
-                key={key}
-                post={posts[key]}
-                onDeletePost={onDeletePost}
-                userId={userId}
-              />
-            ))}
+          {filteredPosts
+            ? Object.keys(filteredPosts)
+                .sort((a, b) => {
+                  return (
+                    new Date(posts[b]['date']).valueOf() -
+                    new Date(posts[a]['date']).valueOf()
+                  );
+                })
+                .map((key: any) => (
+                  <Post
+                    key={key}
+                    post={posts[key]}
+                    onDeletePost={onDeletePost}
+                    userId={userId}
+                  />
+                ))
+            : Object.keys(posts)
+                .sort((a, b) => {
+                  return (
+                    new Date(posts[b]['date']).valueOf() -
+                    new Date(posts[a]['date']).valueOf()
+                  );
+                })
+                .map((key: any) => (
+                  <Post
+                    key={key}
+                    post={posts[key]}
+                    onDeletePost={onDeletePost}
+                    userId={userId}
+                  />
+                ))}
         </tbody>
       </Table>
     </>

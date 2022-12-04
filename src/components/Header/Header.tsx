@@ -13,7 +13,7 @@ const Header: React.FC<HeaderProps> = ({ onLogin, onLogout, userId }) => {
       {userId ? (
         <button
           onClick={onLogout}
-          className='btn btn-outline-primary login-button position-absolute top-50 end-0'
+          className='btn btn-outline-secondary login-button position-absolute top-50 end-0'
         >
           Logout
         </button>
