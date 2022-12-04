@@ -14,3 +14,18 @@
 .del-th {
   width: 10%;
 }
+
+.weather-th {
+  width: 15%;
+}
+
+.board-table button {
+  font-size: 0.85rem;
+}
+
+@media (max-width: 992px) {
+  .date-th,
+  .city-th {
+    width: 15%;
+  }
+}

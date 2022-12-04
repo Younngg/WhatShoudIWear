@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PostRepository, {
   Post as PostInterface,
 } from './../../service/postsRepository';
@@ -17,9 +17,9 @@ const Post: React.FC<PostProps> = ({ post, onDeletePost, userId }) => {
     <tr>
       <td>{date}</td>
       <td>{city}</td>
-      <td>{temp} ℃</td>
+      <td>{temp}°</td>
       <td>{weather}</td>
-      <td>{hashtag.join(', ')}</td>
+      <td className='text-start text-wrap'>{hashtag.join(', ')}</td>
       <td>
         {userId === post.userId && (
           <Button
@@ -27,7 +27,7 @@ const Post: React.FC<PostProps> = ({ post, onDeletePost, userId }) => {
             size='sm'
             onClick={() => onDeletePost(post)}
           >
-            DEL
+            삭제
           </Button>
         )}
       </td>

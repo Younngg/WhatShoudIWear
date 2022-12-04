@@ -15,7 +15,7 @@ const Header: React.FC<HeaderProps> = ({ onLogin, onLogout, userId }) => {
           onClick={onLogout}
           className='btn btn-outline-secondary login-button position-absolute top-50 end-0'
         >
-          Logout
+          로그아웃
         </button>
       ) : (
         <button
@@ -27,7 +27,7 @@ const Header: React.FC<HeaderProps> = ({ onLogin, onLogout, userId }) => {
             alt='google login'
             className='google-icon'
           />
-          Login
+          로그인
         </button>
       )}
     </div>

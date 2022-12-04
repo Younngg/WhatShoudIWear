@@ -84,8 +84,8 @@ const AddPostForm: React.FC<AddPostFormProps> = ({
         <div>
           <Form.Control type='date' defaultValue={getToday()} ref={dateRef} />
         </div>
-        <div className='col-sm-1.5'>
-          <Form.Select ref={cityRef}>
+        <div>
+          <Form.Select ref={cityRef} className='city-select'>
             <option value='none'>지역</option>
             <option value='강원도'>강원도</option>
             <option value='경기도'>경기도</option>
@@ -106,15 +106,16 @@ const AddPostForm: React.FC<AddPostFormProps> = ({
             <option value='충청북도'>충청북도</option>
           </Form.Select>
         </div>
-        <div className='col-sm-1'>
+        <div>
           <Form.Control
             type='number'
             placeholder='기온'
             defaultValue={tempInput}
             onChange={onChangeTempInput}
+            className='temp-input'
           />
         </div>
-        <div className='col-sm-2.5'>
+        <div>
           <Form.Select ref={weatherRef}>
             <option value={weather.weather}>{weather.weather}</option>
             <option value='맑음'>맑음</option>
@@ -130,10 +131,10 @@ const AddPostForm: React.FC<AddPostFormProps> = ({
         hashtagRepository={hashtagRepository}
         allHashtags={allHashtags}
       />
-      <Button className='mt-3' type='submit'>
-        Submit
+      {error && <div className='mt-2 error-message'>{error}</div>}
+      <Button className='mt-2' type='submit'>
+        작성하기
       </Button>
-      {error && <span>{error}</span>}
     </Form>
   );
 };

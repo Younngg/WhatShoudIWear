@@ -86,8 +86,8 @@ const ClothesTag: React.FC<ClothesTagProps> = ({
   return (
     <>
       <div className='form-control mb-1'>
-        <div className='d-flex'>
-          <ul className='d-flex flex-wrap'>
+        <div className='d-flex tag-input-box'>
+          <ul className='d-flex flex-wrap selected-tag-list'>
             {hashArr.map((tag, index) => (
               <li
                 key={index}
@@ -96,7 +96,7 @@ const ClothesTag: React.FC<ClothesTagProps> = ({
                 {tag}
                 <button
                   type='button'
-                  className='border-0 bg-transparent ms-2 delete-tag-btn'
+                  className='border-0 bg-transparent ms-2'
                   onClick={() => {
                     onDeleteHashTag(index);
                   }}

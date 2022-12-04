@@ -1,0 +1,52 @@
+.today-weather {
+  background-color: #e5fff8;
+  color: #333;
+  padding: 2rem 2.5rem;
+  border-radius: 15px;
+  line-height: 1.8;
+  position: relative;
+}
+.today-weather .todays-date {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.today-weather .temp {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-right: 1rem;
+}
+.today-weather .left-box {
+  margin-right: 6rem;
+}
+.recommend-message {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.info-message {
+  position: absolute;
+  bottom: 1rem;
+  right: 1.5rem;
+  font-size: 0.75rem;
+  color: #0abde3;
+}
+
+@media (max-width: 768px) {
+  .today-weather {
+    justify-content: space-between;
+  }
+
+  .today-weather .left-box {
+    margin: 0;
+  }
+}
+@media (max-width: 576px) {
+  .today-weather {
+    flex-direction: column;
+  }
+  .today-weather .left-box {
+    margin-bottom: 2rem;
+  }
+  .today-weather .recommend-message-box {
+    margin-bottom: 1rem;
+  }
+}

@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Form } from 'react-bootstrap';
 import { Posts } from '../../service/postsRepository';
+import './filter.css';
 
 interface FilterProps {
   dates: string[] | [];
@@ -35,13 +36,12 @@ const Filter: React.FC<FilterProps> = ({ dates, setFilteredPosts, posts }) => {
         return;
     }
   };
-  console.log(filter);
 
   const onFilter = () => {
     if (filter.city === '' && filter.date === '' && filter.temp === '') {
       setFilteredPosts(false);
     } else {
-      setFilteredPosts((cur: any) => {
+      setFilteredPosts(() => {
         const updated = { ...posts };
         Object.keys(updated).forEach((key: any) => {
           if (
@@ -53,8 +53,6 @@ const Filter: React.FC<FilterProps> = ({ dates, setFilteredPosts, posts }) => {
                 updated[key]['temp'] <= parseInt(filter.temp[1]))
             )
           ) {
-            console.log(updated[key]);
-
             delete updated[key];
           }
         });
@@ -64,7 +62,7 @@ const Filter: React.FC<FilterProps> = ({ dates, setFilteredPosts, posts }) => {
   };
 
   return (
-    <div className='d-flex mb-3'>
+    <div className='d-flex mb-3 filter'>
       <div className='me-3'>
         <Form.Select onChange={onChangeFilter} id='dateFilter'>
           <option value=''>날짜</option>
@@ -103,7 +101,7 @@ const Filter: React.FC<FilterProps> = ({ dates, setFilteredPosts, posts }) => {
       </div>
       <div className='me-3'>
         <Form.Select onChange={onChangeFilter} id='tempFilter'>
-          <option value=''>기온(℃)</option>
+          <option value=''>기온(°)</option>
           <option value='25~30'>25~30</option>
           <option value='20~25'>20~25</option>
           <option value='15~20'>15~20</option>
@@ -114,7 +112,9 @@ const Filter: React.FC<FilterProps> = ({ dates, setFilteredPosts, posts }) => {
           <option value='-10~-5'>-10~-5</option>
         </Form.Select>
       </div>
-      <button onClick={onFilter}>적용하기</button>
+      <button onClick={onFilter} className='btn btn-outline-primary'>
+        적용하기
+      </button>
     </div>
   );
 };

@@ -2,6 +2,19 @@
 .add-post-form .form-control {
   font-size: 0.9rem;
 }
+
+.temp-input {
+  width: 5rem;
+}
+
+.city-select {
+  width: 7rem;
+}
+
 .add-post-form div {
   margin-right: 1rem;
+}
+
+.add-post-form .error-message {
+  font-size: 0.9rem;
 }

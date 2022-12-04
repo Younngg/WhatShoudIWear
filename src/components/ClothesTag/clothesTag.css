@@ -12,3 +12,21 @@
   cursor: pointer;
   font-size: 0.9rem;
 }
+
+@media (max-width: 992px) {
+  .tag-input-box {
+    flex-direction: column;
+  }
+  .tag-input-box ul {
+    margin-bottom: 0.5rem;
+  }
+  .tag-input-box li {
+    margin-bottom: 0.5rem;
+  }
+  .tag-input-box input {
+    text-indent: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+}
+@media (max-width: 480px) {
+}

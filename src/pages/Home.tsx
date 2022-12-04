@@ -8,6 +8,7 @@ import { Post } from './../service/postsRepository';
 import Header from './../components/Header/Header';
 import AuthService from './../service/authService';
 import { User, UserCredential } from 'firebase/auth';
+import TodayWeather from '../components/TodayWeather/TodayWeather';
 
 const postRepository = new PostRepository();
 const authService = new AuthService();
@@ -69,16 +70,22 @@ const Home = () => {
     authService.logout();
   };
 
-  console.log(filteredPosts);
-
   return (
     <Container>
       <Header onLogin={onLogin} onLogout={onLogout} userId={userId} />
-      <AddPostForm
-        postRepository={postRepository}
-        allHashtags={allHashtags}
-        userId={userId}
-      />
+      <TodayWeather />
+      {userId ? (
+        <AddPostForm
+          postRepository={postRepository}
+          allHashtags={allHashtags}
+          userId={userId}
+        />
+      ) : (
+        <div className='mb-5 text-center'>
+          글을 작성하려면 로그인이 필요해요 :)
+        </div>
+      )}
+
       <Filter
         dates={allDates}
         setFilteredPosts={setFilteredPosts}

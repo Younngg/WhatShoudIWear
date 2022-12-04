@@ -14,3 +14,7 @@
   margin-right: 5px;
   transform: translateY(-2px);
 }
+
+.login-button {
+  font-size: 0.9rem;
+}

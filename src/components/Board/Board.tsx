@@ -32,7 +32,7 @@ const Board: React.FC<BoardProps> = ({
             <th className='temp-th'>기온</th>
             <th className='weather-th'>날씨</th>
             <th className='clothes-th'>옷</th>
-            <th className='del-th'>DEL</th>
+            <th className='del-th'></th>
           </tr>
         </thead>
         <tbody>
