@@ -1,70 +1,79 @@
-# Getting Started with Create React App
+# 오늘 뭐 입지?
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<br />
 
-## Available Scripts
+## 서비스 링크
 
-In the project directory, you can run:
+> https://younngg.github.io/WhatShouldIWear/
 
-### `npm start`
+<br />
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 프로젝트 소개
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+#### 기온별 옷차림을 추천 받을 수 있고, 날씨와 그날 입은 옷을 기록할 수 있는 앱입니다.
 
-### `npm test`
+1. 현재 위치와 날씨에 따른 옷차림 추천을 조회할 수 있습니다.
+2. Google 로그인을 할 수 있고, 로그인 시 글 작성 및 삭제가 가능합니다.
+3. 회원, 비회원 모두 작성글을 조회할 수 있습니다.
+4. 날짜, 지역, 기온 별로 filter 된 글 목록을 조회할 수 있습니다.
+5. 글 작성시 날짜, 현재 기온, 날씨가 자동 입력 되며, 해쉬태그 기능을 사용해 오늘 입은 옷을 작성할 수 있습니다.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<br />
 
-### `npm run build`
+## 구현 화면
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+![KakaoTalk_20221205_153343901](https://user-images.githubusercontent.com/98656282/205566194-be6ddb26-407e-409c-ab77-d12235384fad.gif)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<img width="100%"  src="https://user-images.githubusercontent.com/98656282/205566908-f06ee305-92ce-48f8-8ebd-ff9e87864171.png"/>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+데스크탑
 
-### `npm run eject`
+<img width="40%" src="https://user-images.githubusercontent.com/98656282/205566894-ad9e3a06-7abc-4b58-81f8-6b65715d3b06.png"/>
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+모바일
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<br />
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## :hammer_and_wrench: 기술 스택
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- React
+- TypeScript
+- firebase OAuth
+- firebase Realtime database
+- React Bootstrap
 
-## Learn More
+## :runner: 로컬 실행 방법
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. 레포지토리를 클론하고자 하는 디렉토리에서 아래 명령어를 수행
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+   ```
+   git clone <레포지토리 주소>
+   ```
 
-### Code Splitting
+<br>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+2. 클론한 디렉토리에서 아래 명령어를 통해 필요한 module 설치
 
-### Analyzing the Bundle Size
+   ```
+   npm install
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+<br>
 
-### Making a Progressive Web App
+3. firebase, open weather API에서 필요한 `.env` 설정
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- 아래 설명에 따라 환경변수 설정
 
-### Advanced Configuration
+  ```
+  REACT_APP_FIREBASE_API_KEY=<firebase API 키>
+  REACT_APP_FIREBASE_AUTH_DOMAIN=<firebase Auth domain>
+  REACT_APP_FIREBASE_DB_URL=<firebase database url>
+  REACT_APP_FIREBASE_PROJECT_ID=<firebase project id>
+  REACT_APP_WEATHER_API_KEY=<open weather API 키>
+  ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+4. 앱을 실행
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+   ```
+   npm start
+   ```
