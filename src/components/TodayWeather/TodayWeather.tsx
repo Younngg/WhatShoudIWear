@@ -3,7 +3,7 @@ import { getGeoWeather } from './../../service/weatherAPI';
 import useClothes from './../../hooks/useClothes';
 import './todayWeather.css';
 
-const TodayWeather = () => {
+const TodayWeather: React.FC<{ isLoading: boolean }> = ({ isLoading }) => {
   const date = new Date();
   const [weather, setWeather] = useState({
     temp: 0,
@@ -26,7 +26,7 @@ const TodayWeather = () => {
 
   return (
     <div className='mb-5 today-weather d-flex'>
-      <div className='left-box'>
+      <div className='left-box w-50'>
         <div className='todays-date'>{date.toLocaleDateString('ko-kr')}</div>
         <div>
           <div>위치 : {weather.place}</div>
@@ -41,7 +41,13 @@ const TodayWeather = () => {
       </div>
       <div className='align-self-start recommend-message-box'>
         <div className='recommend-message mb-2'>오늘 추천하는 옷은...</div>
-        <div>{clothes}</div>
+        {isLoading ? (
+          <span className='placeholder col-12 placeholder-lg bg-success'></span>
+        ) : weather.temp ? (
+          <div>{clothes}</div>
+        ) : (
+          ''
+        )}
       </div>
       <span className='info-message'>
         * 날씨나 위치가 정확하지 않을 수 있습니다.

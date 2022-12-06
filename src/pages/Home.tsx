@@ -24,7 +24,10 @@ const Home = () => {
   const [allDates, setAllDates] = useState<string[] | []>([]);
   const [userId, setUserId] = useState<string>('');
 
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   useEffect(() => {
+    setIsLoading(true);
     postRepository.syncPosts((posts: any) => {
       setPosts(posts);
       setAllHashtags((cur: any) => {
@@ -41,6 +44,7 @@ const Home = () => {
         });
         return arr.filter((ele, index) => arr.indexOf(ele) === index);
       });
+      setIsLoading(false);
     });
   }, []);
 
@@ -76,7 +80,7 @@ const Home = () => {
   return (
     <Container>
       <Header onLogin={onLogin} onLogout={onLogout} userId={userId} />
-      <TodayWeather />
+      <TodayWeather isLoading={isLoading} />
       {userId ? (
         <AddPostForm
           postRepository={postRepository}
@@ -95,6 +99,7 @@ const Home = () => {
         posts={posts}
       />
       <Board
+        isLoading={isLoading}
         setAllHashtags={setAllHashtags}
         posts={posts}
         onDeletePost={onDeletePost}

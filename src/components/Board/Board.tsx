@@ -1,12 +1,9 @@
 import React from 'react';
 import { Table } from 'react-bootstrap';
 import Post from '../Post/Post';
-import PostRepository, {
-  Post as PostInterface,
-  Posts,
-} from '../../service/postsRepository';
+import { Post as PostInterface, Posts } from '../../service/postsRepository';
 import './board.css';
-import Filter from './../Filter/Filter';
+import Spinner from './../Spinner/Spinner';
 
 interface BoardProps {
   setAllHashtags: React.Dispatch<any>;
@@ -14,6 +11,7 @@ interface BoardProps {
   onDeletePost: (post: PostInterface) => void;
   userId: string;
   filteredPosts: any;
+  isLoading: boolean;
 }
 
 const Board: React.FC<BoardProps> = ({
@@ -21,6 +19,7 @@ const Board: React.FC<BoardProps> = ({
   onDeletePost,
   userId,
   filteredPosts,
+  isLoading,
 }) => {
   return (
     <>
@@ -69,6 +68,7 @@ const Board: React.FC<BoardProps> = ({
                 ))}
         </tbody>
       </Table>
+      {isLoading && <Spinner />}
     </>
   );
 };
