@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/WhatShouldIWear/static/css/main.9c6fba87.css",
-    "main.js": "/WhatShouldIWear/static/js/main.30309918.js",
+    "main.js": "/WhatShouldIWear/static/js/main.cd3ca3b3.js",
     "index.html": "/WhatShouldIWear/index.html",
     "main.9c6fba87.css.map": "/WhatShouldIWear/static/css/main.9c6fba87.css.map",
-    "main.30309918.js.map": "/WhatShouldIWear/static/js/main.30309918.js.map"
+    "main.cd3ca3b3.js.map": "/WhatShouldIWear/static/js/main.cd3ca3b3.js.map"
   },
   "entrypoints": [
     "static/css/main.9c6fba87.css",
-    "static/js/main.30309918.js"
+    "static/js/main.cd3ca3b3.js"
   ]
 }
