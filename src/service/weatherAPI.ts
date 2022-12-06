@@ -11,12 +11,19 @@ const onGeoOk = async (position: any, onUpdate: any) => {
   result && onUpdate(result);
 };
 
-function onGeoError() {
-  alert("Can't find you. No weather for you.");
-}
+const onGeoError = (onError: any) => {
+  onError(
+    '날씨 및 위치를 불러오지 못했습니다. 위치 액세스가 허용되었는지 확인해주세요.'
+  );
+};
 
-export const getGeoWeather = (onUpdate: any) => {
-  return navigator.geolocation.getCurrentPosition((position) => {
-    onGeoOk(position, onUpdate);
-  }, onGeoError);
+export const getGeoWeather = (onUpdate: any, onError?: any) => {
+  return navigator.geolocation.getCurrentPosition(
+    (position) => {
+      onGeoOk(position, onUpdate);
+    },
+    () => {
+      onGeoError(onError);
+    }
+  );
 };

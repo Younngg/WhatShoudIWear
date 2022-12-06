@@ -11,17 +11,23 @@ const TodayWeather: React.FC<{ isLoading: boolean }> = ({ isLoading }) => {
     weather: '',
     place: '',
   });
+  const [errorMessage, setErrorMessage] = useState('');
   const clothes = useClothes(weather.temp);
 
   useEffect(() => {
-    getGeoWeather((data: any) => {
-      setWeather({
-        temp: data.main.temp,
-        feels_like: data.main.feels_like,
-        weather: data.weather[0].description,
-        place: data.name,
-      });
-    });
+    getGeoWeather(
+      (data: any) => {
+        setWeather({
+          temp: data.main.temp,
+          feels_like: data.main.feels_like,
+          weather: data.weather[0].description,
+          place: data.name,
+        });
+      },
+      (err: any) => {
+        setErrorMessage(err);
+      }
+    );
   }, []);
 
   return (
@@ -41,13 +47,13 @@ const TodayWeather: React.FC<{ isLoading: boolean }> = ({ isLoading }) => {
       </div>
       <div className='align-self-start recommend-message-box'>
         <div className='recommend-message mb-2'>오늘 추천하는 옷은...</div>
-        {isLoading ? (
-          <span className='placeholder col-12 placeholder-lg bg-success'></span>
-        ) : weather.temp ? (
-          <div>{clothes}</div>
-        ) : (
-          ''
-        )}
+        <div>
+          {errorMessage || !weather.weather ? (
+            <span>{errorMessage}</span>
+          ) : (
+            <span>{clothes}</span>
+          )}
+        </div>
       </div>
       <span className='info-message'>
         * 날씨나 위치가 정확하지 않을 수 있습니다.
