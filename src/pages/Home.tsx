@@ -30,6 +30,7 @@ const Home = () => {
     setIsLoading(true);
     postRepository.syncPosts((posts: any) => {
       setPosts(posts);
+
       setAllHashtags((cur: any) => {
         const arr = [...cur];
         Object.keys(posts).forEach((key: any) => {
@@ -44,17 +45,14 @@ const Home = () => {
         });
         return arr.filter((ele, index) => arr.indexOf(ele) === index);
       });
+
       setIsLoading(false);
     });
   }, []);
 
   useEffect(() => {
     authService.onAuthChange((user: User) => {
-      if (user) {
-        setUserId(user.uid);
-      } else {
-        setUserId('');
-      }
+      setUserId(user ? user.uid : '');
     });
   }, []);
 
@@ -67,10 +65,9 @@ const Home = () => {
     postRepository.removePost(post);
   };
 
-  const onLogin = () => {
-    authService
-      .login('Google')
-      .then((data: UserCredential) => setUserId(data.user.uid));
+  const onLogin = async () => {
+    const data = await authService.login('Google');
+    setUserId(data.user.uid);
   };
 
   const onLogout = () => {
