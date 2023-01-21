@@ -15,7 +15,7 @@ const useClothes = (temp?: number) => {
         return '자켓, 트렌치코트, 야상, 니트, 스타킹, 청바지, 면바지';
       case temp >= 5:
         return '코트, 히트텍/내복, 니트, 청바지, 레깅스';
-      case temp <= 4:
+      case temp < 5:
         return '패딩, 두꺼운 코트, 기모제품, 목도리, 히트텍/내복';
       default:
         return '데이터를 불러오지 못했습니다.';
