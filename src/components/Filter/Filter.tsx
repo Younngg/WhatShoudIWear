@@ -1,21 +1,19 @@
 import React, { useState } from 'react';
-import { Form } from 'react-bootstrap';
 import { Posts } from '../../service/postsRepository';
-import './filter.css';
 
-interface FilterProps {
+type Props = {
   dates: string[] | [];
   setFilteredPosts: React.Dispatch<React.SetStateAction<Posts | false>>;
   posts: Posts;
-}
+};
 
-interface FilterState {
+type FilterState = {
   date: string;
   city: string;
   temp: string;
-}
+};
 
-const Filter: React.FC<FilterProps> = ({ dates, setFilteredPosts, posts }) => {
+const Filter = ({ dates, setFilteredPosts, posts }: Props) => {
   const [filter, setFilter] = useState({ date: '', city: '', temp: '' });
 
   const onChangeFilter = (e: { target: { value: any; id: any } }) => {
@@ -64,7 +62,7 @@ const Filter: React.FC<FilterProps> = ({ dates, setFilteredPosts, posts }) => {
   return (
     <div className='d-flex mb-3 filter'>
       <div className='me-3'>
-        <Form.Select onChange={onChangeFilter} id='dateFilter'>
+        <select onChange={onChangeFilter} id='dateFilter'>
           <option value=''>날짜</option>
           {dates
             .sort((a, b) => {
@@ -75,10 +73,10 @@ const Filter: React.FC<FilterProps> = ({ dates, setFilteredPosts, posts }) => {
                 {date}
               </option>
             ))}
-        </Form.Select>
+        </select>
       </div>
       <div className='me-3'>
-        <Form.Select onChange={onChangeFilter} id='cityFilter'>
+        <select onChange={onChangeFilter} id='cityFilter'>
           <option value=''>지역</option>
           <option value='강원도'>강원도</option>
           <option value='경기도'>경기도</option>
@@ -97,10 +95,10 @@ const Filter: React.FC<FilterProps> = ({ dates, setFilteredPosts, posts }) => {
           <option value='제주도'>제주도</option>
           <option value='충청남도'>충청남도</option>
           <option value='충청북도'>충청북도</option>
-        </Form.Select>
+        </select>
       </div>
       <div className='me-3'>
-        <Form.Select onChange={onChangeFilter} id='tempFilter'>
+        <select onChange={onChangeFilter} id='tempFilter'>
           <option value=''>기온(°)</option>
           <option value='25~30'>25~30</option>
           <option value='20~25'>20~25</option>
@@ -110,7 +108,7 @@ const Filter: React.FC<FilterProps> = ({ dates, setFilteredPosts, posts }) => {
           <option value='0~5'>0~5</option>
           <option value='-5~0'>-5~0</option>
           <option value='-10~-5'>-10~-5</option>
-        </Form.Select>
+        </select>
       </div>
       <button onClick={onFilter} className='btn btn-outline-primary'>
         적용하기

@@ -1,12 +1,12 @@
 import React from 'react';
 import './header.css';
 
-interface HeaderProps {
+type Props = {
   onLogin: () => void;
   onLogout: () => void;
   userId: string;
-}
-const Header: React.FC<HeaderProps> = ({ onLogin, onLogout, userId }) => {
+};
+const Header = ({ onLogin, onLogout, userId }: Props) => {
   return (
     <div className='mb-5 header position-relative'>
       <h1 className=''>오늘 뭐 입지?</h1>

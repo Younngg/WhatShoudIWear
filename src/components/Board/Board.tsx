@@ -1,29 +1,28 @@
 import React from 'react';
-import { Table } from 'react-bootstrap';
 import Post from '../Post/Post';
 import { Post as PostInterface, Posts } from '../../service/postsRepository';
 import './board.css';
 import Spinner from './../Spinner/Spinner';
 
-interface BoardProps {
+type Props = {
   setAllHashtags: React.Dispatch<any>;
   posts: Posts;
   onDeletePost: (post: PostInterface) => void;
   userId: string;
   filteredPosts: any;
   isLoading: boolean;
-}
+};
 
-const Board: React.FC<BoardProps> = ({
+const Board = ({
   posts,
   onDeletePost,
   userId,
   filteredPosts,
   isLoading,
-}) => {
+}: Props) => {
   return (
     <>
-      <Table bordered className='board-table'>
+      <table className='board-table'>
         <thead>
           <tr>
             <th className='date-th'>날짜</th>
@@ -67,7 +66,7 @@ const Board: React.FC<BoardProps> = ({
                   />
                 ))}
         </tbody>
-      </Table>
+      </table>
       {isLoading && <Spinner />}
     </>
   );

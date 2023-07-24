@@ -3,7 +3,7 @@ import { getGeoWeather } from './../../service/weatherAPI';
 import useClothes from './../../hooks/useClothes';
 import './todayWeather.css';
 
-const TodayWeather: React.FC<{ isLoading: boolean }> = ({ isLoading }) => {
+const TodayWeather = ({ isLoading }: { isLoading: boolean }) => {
   const date = new Date();
   const [weather, setWeather] = useState({
     temp: 0,

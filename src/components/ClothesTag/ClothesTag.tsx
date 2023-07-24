@@ -1,27 +1,19 @@
-import React, {
-  useState,
-  useEffect,
-  ReactSVG,
-  MouseEvent,
-  MouseEventHandler,
-} from 'react';
-import { Form } from 'react-bootstrap';
-import './clothesTag.css';
+import React, { useState, useEffect } from 'react';
 import HashtagRepository from './../../service/hashtagRepository';
 
-interface ClothesTagProps {
+type Props = {
   hashArr: [] | string[];
   setHashArr: React.Dispatch<React.SetStateAction<[] | string[]>>;
   hashtagRepository: HashtagRepository;
   allHashtags: string[] | [];
-}
+};
 
-const ClothesTag: React.FC<ClothesTagProps> = ({
+const ClothesTag = ({
   hashArr,
   setHashArr,
   hashtagRepository,
   allHashtags,
-}) => {
+}: Props) => {
   const [hashtag, setHashtag] = useState<string>('');
 
   const [allHashtag, setAllHashtag] = useState<string[] | []>([]);

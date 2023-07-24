@@ -1,16 +1,13 @@
 import React, { useState } from 'react';
-import PostRepository, {
-  Post as PostInterface,
-} from './../../service/postsRepository';
-import { Button } from 'react-bootstrap';
+import { Post as PostInterface } from './../../service/postsRepository';
 
-interface PostProps {
+type Props = {
   post: PostInterface;
   onDeletePost: (post: PostInterface) => void;
   userId: string;
-}
+};
 
-const Post: React.FC<PostProps> = ({ post, onDeletePost, userId }) => {
+const Post = ({ post, onDeletePost, userId }: Props) => {
   const { city, temp, weather, hashtag, date } = post;
 
   return (
@@ -22,13 +19,7 @@ const Post: React.FC<PostProps> = ({ post, onDeletePost, userId }) => {
       <td className='text-start text-wrap'>{hashtag.join(', ')}</td>
       <td>
         {userId === post.userId && (
-          <Button
-            variant='secondary'
-            size='sm'
-            onClick={() => onDeletePost(post)}
-          >
-            삭제
-          </Button>
+          <button onClick={() => onDeletePost(post)}>삭제</button>
         )}
       </td>
     </tr>

@@ -1,24 +1,18 @@
 import React, { useState, useEffect, ComponentProps, useRef } from 'react';
-import { Form, Button } from 'react-bootstrap';
 import ClothesTag from '../ClothesTag/ClothesTag';
 import './addPostForm.css';
 import { getGeoWeather } from './../../service/weatherAPI';
-import PostRepository from './../../service/postsRepository';
 import HashtagRepository from './../../service/hashtagRepository';
+import postRepository from './../../service/postsRepository';
 
 const hashtagRepository = new HashtagRepository();
 
-interface AddPostFormProps {
-  postRepository: PostRepository;
+type Props = {
   allHashtags: string[] | [];
   userId: string;
-}
+};
 
-const AddPostForm: React.FC<AddPostFormProps> = ({
-  postRepository,
-  allHashtags,
-  userId,
-}) => {
+const AddPostForm = ({ allHashtags, userId }: Props) => {
   const [weather, setWeather] = useState<any>({
     weather: '',
     temp: 0,
@@ -79,13 +73,13 @@ const AddPostForm: React.FC<AddPostFormProps> = ({
   }
 
   return (
-    <Form className='add-post-form mb-5' onSubmit={onSubmitPost}>
+    <form className='add-post-form mb-5' onSubmit={onSubmitPost}>
       <div className='d-flex mb-3'>
         <div>
-          <Form.Control type='date' defaultValue={getToday()} ref={dateRef} />
+          <input type='date' defaultValue={getToday()} ref={dateRef} />
         </div>
         <div>
-          <Form.Select ref={cityRef} className='city-select'>
+          <select ref={cityRef} className='city-select'>
             <option value='none'>지역</option>
             <option value='강원도'>강원도</option>
             <option value='경기도'>경기도</option>
@@ -104,10 +98,10 @@ const AddPostForm: React.FC<AddPostFormProps> = ({
             <option value='제주도'>제주도</option>
             <option value='충청남도'>충청남도</option>
             <option value='충청북도'>충청북도</option>
-          </Form.Select>
+          </select>
         </div>
         <div>
-          <Form.Control
+          <input
             type='number'
             placeholder='기온'
             defaultValue={tempInput}
@@ -116,13 +110,13 @@ const AddPostForm: React.FC<AddPostFormProps> = ({
           />
         </div>
         <div>
-          <Form.Select ref={weatherRef}>
+          <select ref={weatherRef}>
             <option value={weather.weather}>{weather.weather}</option>
             <option value='맑음'>맑음</option>
             <option value='비'>비</option>
             <option value='눈'>눈</option>
             <option value='안개'>안개</option>
-          </Form.Select>
+          </select>
         </div>
       </div>
       <ClothesTag
@@ -132,10 +126,10 @@ const AddPostForm: React.FC<AddPostFormProps> = ({
         allHashtags={allHashtags}
       />
       {error && <div className='mt-2 error-message'>{error}</div>}
-      <Button className='mt-2' type='submit'>
+      <button className='mt-2' type='submit'>
         작성하기
-      </Button>
-    </Form>
+      </button>
+    </form>
   );
 };
 

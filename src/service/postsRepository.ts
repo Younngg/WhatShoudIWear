@@ -48,4 +48,6 @@ class PostRepository {
   }
 }
 
-export default PostRepository;
+const postRepository = new PostRepository();
+
+export default postRepository;
