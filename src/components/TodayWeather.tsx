@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { getGeoWeather } from './../../service/weatherAPI';
-import useClothes from './../../hooks/useClothes';
-import './todayWeather.css';
+import { getGeoWeather } from '../service/weatherAPI';
+import useClothes from '../hooks/useClothes';
 
 const TodayWeather = ({ isLoading }: { isLoading: boolean }) => {
   const date = new Date();

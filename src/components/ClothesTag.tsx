@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import HashtagRepository from './../../service/hashtagRepository';
+import HashtagRepository from '../service/hashtagRepository';
 
 type Props = {
   hashArr: [] | string[];

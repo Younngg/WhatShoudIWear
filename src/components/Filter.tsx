@@ -1,10 +1,17 @@
 import React, { useState } from 'react';
-import { Posts } from '../../service/postsRepository';
+import { Post, Posts } from '../service/postsRepository';
 
 type Props = {
   dates: string[] | [];
-  setFilteredPosts: React.Dispatch<React.SetStateAction<Posts | false>>;
-  posts: Posts;
+  posts: Post[];
+  filter: { date: string; city: string; temp: string };
+  setFilter: React.Dispatch<
+    React.SetStateAction<{
+      date: string;
+      city: string;
+      temp: string;
+    }>
+  >;
 };
 
 type FilterState = {
@@ -13,9 +20,7 @@ type FilterState = {
   temp: string;
 };
 
-const Filter = ({ dates, setFilteredPosts, posts }: Props) => {
-  const [filter, setFilter] = useState({ date: '', city: '', temp: '' });
-
+const Filter = ({ dates, posts, filter, setFilter }: Props) => {
   const onChangeFilter = (e: { target: { value: any; id: any } }) => {
     switch (e.target.id) {
       case 'dateFilter':
@@ -32,30 +37,6 @@ const Filter = ({ dates, setFilteredPosts, posts }: Props) => {
         break;
       default:
         return;
-    }
-  };
-
-  const onFilter = () => {
-    if (filter.city === '' && filter.date === '' && filter.temp === '') {
-      setFilteredPosts(false);
-    } else {
-      setFilteredPosts(() => {
-        const updated = { ...posts };
-        Object.keys(updated).forEach((key: any) => {
-          if (
-            !updated[key]['date'].includes(filter.date) ||
-            !updated[key]['city'].includes(filter.city) ||
-            !(
-              updated[key]['city'].includes(filter.temp) ||
-              (updated[key]['temp'] > parseInt(filter.temp[0]) &&
-                updated[key]['temp'] <= parseInt(filter.temp[1]))
-            )
-          ) {
-            delete updated[key];
-          }
-        });
-        return updated;
-      });
     }
   };
 
@@ -110,9 +91,7 @@ const Filter = ({ dates, setFilteredPosts, posts }: Props) => {
           <option value='-10~-5'>-10~-5</option>
         </select>
       </div>
-      <button onClick={onFilter} className='btn btn-outline-primary'>
-        적용하기
-      </button>
+      <button className='btn btn-outline-primary'>적용하기</button>
     </div>
   );
 };

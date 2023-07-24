@@ -1,5 +1,4 @@
 import React from 'react';
-import './header.css';
 
 type Props = {
   onLogin: () => void;

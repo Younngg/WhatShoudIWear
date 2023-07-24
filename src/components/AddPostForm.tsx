@@ -1,9 +1,8 @@
 import React, { useState, useEffect, ComponentProps, useRef } from 'react';
-import ClothesTag from '../ClothesTag/ClothesTag';
-import './addPostForm.css';
-import { getGeoWeather } from './../../service/weatherAPI';
-import HashtagRepository from './../../service/hashtagRepository';
-import postRepository from './../../service/postsRepository';
+import ClothesTag from './ClothesTag';
+import { getGeoWeather } from '../service/weatherAPI';
+import HashtagRepository from '../service/hashtagRepository';
+import postRepository from '../service/postsRepository';
 
 const hashtagRepository = new HashtagRepository();
 
