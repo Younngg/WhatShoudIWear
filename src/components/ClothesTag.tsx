@@ -1,34 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import HashtagRepository from '../service/hashtagRepository';
 
 type Props = {
   hashArr: [] | string[];
   setHashArr: React.Dispatch<React.SetStateAction<[] | string[]>>;
-  hashtagRepository: HashtagRepository;
   allHashtags: string[] | [];
 };
 
-const ClothesTag = ({
-  hashArr,
-  setHashArr,
-  hashtagRepository,
-  allHashtags,
-}: Props) => {
+const ClothesTag = ({ hashArr, setHashArr, allHashtags }: Props) => {
   const [hashtag, setHashtag] = useState<string>('');
-
-  const [allHashtag, setAllHashtag] = useState<string[] | []>([]);
   const [error, setError] = useState('');
 
   const onChangeClothes = (e: React.ChangeEvent<HTMLInputElement>) => {
     setHashtag(e.target.value);
   };
-
-  // hashtags get
-  useEffect(() => {
-    hashtagRepository.syncHashtags((tags: any) => {
-      setAllHashtag(tags);
-    });
-  }, [hashtagRepository]);
 
   // clothes에 쉼표 입력시 hashtag로 바꿔줌
   useEffect(() => {
@@ -77,18 +61,15 @@ const ClothesTag = ({
 
   return (
     <>
-      <div className='form-control mb-1'>
-        <div className='d-flex tag-input-box'>
-          <ul className='d-flex flex-wrap selected-tag-list'>
+      <div className='mb-1'>
+        <div className='sm:flex w-full border rounded-md p-2 gap-2'>
+          <ul className='flex flex-wrap gap-2 selected-tag-list'>
             {hashArr.map((tag, index) => (
-              <li
-                key={index}
-                className='d-flex me-2 border rounded-pill px-3 py-1'
-              >
+              <li key={index} className='flex border rounded-full px-3 py-1'>
                 {tag}
                 <button
                   type='button'
-                  className='border-0 bg-transparent ms-2'
+                  className='ms-2'
                   onClick={() => {
                     onDeleteHashTag(index);
                   }}
@@ -99,15 +80,15 @@ const ClothesTag = ({
             ))}
           </ul>
           <input
-            className='border border-0 outline-none'
-            placeholder='옷'
+            className='outline-none'
+            placeholder={hashArr.length >= 1 ? '' : '옷'}
             value={hashtag}
             onChange={onChangeClothes}
           />
         </div>
       </div>
       <span>{error}</span>
-      <div className='border rounded all-tag-box w-100 d-flex align-items-self flex-wrap'>
+      <div className='border rounded-md w-full flex  flex-wrap'>
         {allHashtags
           .sort((a, b) => {
             return a.localeCompare(b);
@@ -115,7 +96,7 @@ const ClothesTag = ({
           .map((tag, index) => (
             <div
               key={index}
-              className='me-2 border rounded-pill px-3 py-1 hashtag-button btn-outline-info btn'
+              className='px-3 py-1 m-1 border text-sky-500 w-fit rounded-full hover:bg-sky-500 hover:text-white hover:border-sky-500'
               onClick={onClickHashtag}
             >
               {tag}
