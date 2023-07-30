@@ -11,15 +11,20 @@ const Post = ({ post, onDeletePost, userId }: Props) => {
   const { city, temp, weather, hashtag, date } = post;
 
   return (
-    <tr>
-      <td>{date}</td>
-      <td>{city}</td>
-      <td>{temp}°</td>
-      <td>{weather}</td>
-      <td className='text-start text-wrap'>{hashtag.join(', ')}</td>
-      <td>
+    <tr className='text-center h-14 border-b'>
+      <td className='sm:w-auto w-20'>{date.replace(/-/g, '.')}</td>
+      <td className='sm:w-auto w-12'>{city}</td>
+      <td className='sm:w-auto w-12'>{temp}°</td>
+      <td className='sm:w-auto w-16 hidden sm:table-cell'>{weather}</td>
+      <td className='text-left px-1'>{hashtag.join(', ')}</td>
+      <td className='px-2'>
         {userId === post.userId && (
-          <button onClick={() => onDeletePost(post)}>삭제</button>
+          <button
+            onClick={() => onDeletePost(post)}
+            className='w-10 bg-red-500 text-white'
+          >
+            삭제
+          </button>
         )}
       </td>
     </tr>

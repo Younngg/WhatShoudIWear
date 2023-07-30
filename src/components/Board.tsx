@@ -16,15 +16,15 @@ type Props = {
 const Board = ({ posts, onDeletePost, userId, isLoading }: Props) => {
   return (
     <>
-      <table className='board-table'>
-        <thead>
+      <table className='border w-full text-sm md:text-base'>
+        <thead className='border-b h-10'>
           <tr>
-            <th className='date-th'>날짜</th>
-            <th className='city-th'>지역</th>
-            <th className='temp-th'>기온</th>
-            <th className='weather-th'>날씨</th>
-            <th className='clothes-th'>옷</th>
-            <th className='del-th'></th>
+            <th>날짜</th>
+            <th>지역</th>
+            <th>기온</th>
+            <th className='hidden sm:table-cell'>날씨</th>
+            <th>옷</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
