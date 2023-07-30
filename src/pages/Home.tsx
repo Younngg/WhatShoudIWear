@@ -1,53 +1,52 @@
 import React, { useState, useEffect } from 'react';
-import { Container } from 'react-bootstrap';
-import Board from './../components/Board/Board';
-import AddPostForm from './../components/AddPostForm/AddPostForm';
-import PostRepository, { Posts } from '../service/postsRepository';
-import Filter from './../components/Filter/Filter';
+import Board from '../components/Board';
+import AddPostForm from '../components/AddPostForm';
+import postRepository from '../service/postsRepository';
+import Filter from '../components/Filter';
 import { Post } from './../service/postsRepository';
-import Header from './../components/Header/Header';
+import Header from '../components/Header';
 import AuthService from './../service/authService';
-import { User, UserCredential } from 'firebase/auth';
-import TodayWeather from '../components/TodayWeather/TodayWeather';
-import useClothes from './../hooks/useClothes';
+import { User } from 'firebase/auth';
+import TodayWeather from '../components/TodayWeather';
 
-const postRepository = new PostRepository();
 const authService = new AuthService();
 
 const Home = () => {
-  const clothes = useClothes();
-
-  const [posts, setPosts] = useState<Posts>({});
-  const [filteredPosts, setFilteredPosts] = useState<Posts | false>(false);
-
-  const [allHashtags, setAllHashtags] = useState<any>(clothes);
-  const [allDates, setAllDates] = useState<string[] | []>([]);
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [filter, setFilter] = useState({ date: '', city: '', temp: '' });
   const [userId, setUserId] = useState<string>('');
-
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const filtered = posts.filter((post) => {
+    if (post.date.includes(filter.date) && post.city.includes(filter.city)) {
+      if (filter.temp === '') return post;
+      else if (
+        post.temp > parseInt(filter.temp[0]) &&
+        post.temp <= parseInt(filter.temp[1])
+      )
+        return post;
+    }
+    return undefined;
+  });
+
+  const tags =
+    posts.length < 1
+      ? []
+      : ([...new Set(posts.flatMap((post) => post.hashtag))] as string[]);
+  const dates =
+    posts.length < 1
+      ? []
+      : ([...new Set(posts.map((post) => post.date))] as string[]);
 
   useEffect(() => {
     setIsLoading(true);
-    postRepository.syncPosts((posts: any) => {
+    postRepository.syncPosts((data: { [index: string]: Post }) => {
+      const posts = Object.values(data).sort((a, b) =>
+        a.date < b.date ? 1 : -1
+      );
       setPosts(posts);
-
-      setAllHashtags((cur: any) => {
-        const arr = [...cur];
-        Object.keys(posts).forEach((key: any) => {
-          arr.push(...posts[key]['hashtag']);
-        });
-        return arr.filter((ele, index) => arr.indexOf(ele) === index);
-      });
-      setAllDates((cur: any) => {
-        const arr = [...cur];
-        Object.keys(posts).forEach((key: any) => {
-          arr.push(posts[key]['date']);
-        });
-        return arr.filter((ele, index) => arr.indexOf(ele) === index);
-      });
-
-      setIsLoading(false);
     });
+    setIsLoading(false);
   }, []);
 
   useEffect(() => {
@@ -75,35 +74,24 @@ const Home = () => {
   };
 
   return (
-    <Container>
+    <div className='max-w-screen-lg mx-auto'>
       <Header onLogin={onLogin} onLogout={onLogout} userId={userId} />
       <TodayWeather isLoading={isLoading} />
       {userId ? (
-        <AddPostForm
-          postRepository={postRepository}
-          allHashtags={allHashtags}
-          userId={userId}
-        />
+        <AddPostForm allHashtags={tags} userId={userId} />
       ) : (
         <div className='mb-5 text-center'>
           글을 작성하려면 로그인이 필요해요 :)
         </div>
       )}
-
-      <Filter
-        dates={allDates}
-        setFilteredPosts={setFilteredPosts}
-        posts={posts}
-      />
+      <Filter dates={dates} setFilter={setFilter} />
       <Board
         isLoading={isLoading}
-        setAllHashtags={setAllHashtags}
-        posts={posts}
+        posts={filtered}
         onDeletePost={onDeletePost}
         userId={userId}
-        filteredPosts={filteredPosts}
       />
-    </Container>
+    </div>
   );
 };
 

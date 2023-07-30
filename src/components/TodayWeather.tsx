@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { getGeoWeather } from './../../service/weatherAPI';
-import useClothes from './../../hooks/useClothes';
-import './todayWeather.css';
+import { getGeoWeather } from '../service/weatherAPI';
+import useClothes from '../hooks/useClothes';
 
-const TodayWeather: React.FC<{ isLoading: boolean }> = ({ isLoading }) => {
+const TodayWeather = ({ isLoading }: { isLoading: boolean }) => {
   const date = new Date();
   const [weather, setWeather] = useState({
     temp: 0,
@@ -31,31 +30,31 @@ const TodayWeather: React.FC<{ isLoading: boolean }> = ({ isLoading }) => {
   }, []);
 
   return (
-    <div className='mb-5 today-weather d-flex'>
-      <div className='left-box w-50'>
-        <div className='todays-date'>{date.toLocaleDateString('ko-kr')}</div>
-        <div>
-          <div>위치 : {weather.place}</div>
-          <div className='d-flex weather'>
-            <div className='temp'>{weather.temp}°</div>
-            <div>
-              <div>{weather.weather}</div>
-              <div>체감 {weather.feels_like}°</div>
-            </div>
+    <div className='mb-5 flex  relative w-full px-8 py-5 gap-10 bg-sky-100 rounded-xl'>
+      <div className=''>
+        <p className='text-xl font-semibold'>
+          {date.toLocaleDateString('ko-kr')}
+        </p>
+        <p>위치 : {weather.place}</p>
+        <div className='flex items-center justify-between gap-3 mt-2'>
+          <p className='text-2xl font-bold'>{weather.temp}°</p>
+          <div>
+            <p>{weather.weather}</p>
+            <p>체감 {weather.feels_like}°</p>
           </div>
         </div>
       </div>
-      <div className='align-self-start recommend-message-box'>
-        <div className='recommend-message mb-2'>오늘 추천하는 옷은...</div>
-        <div>
+      <div>
+        <p className='text-xl font-semibold mb-2'>오늘 추천하는 옷은...</p>
+        <p>
           {errorMessage || !weather.weather ? (
             <span>{errorMessage}</span>
           ) : (
             <span>{clothes}</span>
           )}
-        </div>
+        </p>
       </div>
-      <span className='info-message'>
+      <span className='absolute right-4 bottom-2 text-sm text-blue-500'>
         * 날씨나 위치가 정확하지 않을 수 있습니다.
       </span>
     </div>
