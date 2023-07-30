@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
-import { Post, Posts } from '../service/postsRepository';
+import React from 'react';
 
 type Props = {
   dates: string[] | [];
-  posts: Post[];
-  filter: { date: string; city: string; temp: string };
+
   setFilter: React.Dispatch<
     React.SetStateAction<{
       date: string;
@@ -20,7 +18,7 @@ type FilterState = {
   temp: string;
 };
 
-const Filter = ({ dates, posts, filter, setFilter }: Props) => {
+const Filter = ({ dates, setFilter }: Props) => {
   const onChangeFilter = (e: { target: { value: any; id: any } }) => {
     switch (e.target.id) {
       case 'dateFilter':
@@ -40,20 +38,20 @@ const Filter = ({ dates, posts, filter, setFilter }: Props) => {
     }
   };
 
+  const onResetFilter = () => {
+    setFilter((cur: FilterState) => ({ ...cur, date: '', city: '', temp: '' }));
+  };
+
   return (
     <div className='d-flex mb-3 filter'>
       <div className='me-3'>
         <select onChange={onChangeFilter} id='dateFilter'>
           <option value=''>날짜</option>
-          {dates
-            .sort((a, b) => {
-              return new Date(b).valueOf() - new Date(a).valueOf();
-            })
-            .map((date, index) => (
-              <option key={index} value={date}>
-                {date}
-              </option>
-            ))}
+          {dates.map((date, index) => (
+            <option key={index} value={date}>
+              {date}
+            </option>
+          ))}
         </select>
       </div>
       <div className='me-3'>
@@ -91,7 +89,9 @@ const Filter = ({ dates, posts, filter, setFilter }: Props) => {
           <option value='-10~-5'>-10~-5</option>
         </select>
       </div>
-      <button className='btn btn-outline-primary'>적용하기</button>
+      <button onClick={onResetFilter} className='btn btn-outline-primary'>
+        초기화
+      </button>
     </div>
   );
 };

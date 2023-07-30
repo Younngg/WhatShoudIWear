@@ -8,15 +8,14 @@ import Header from '../components/Header';
 import AuthService from './../service/authService';
 import { User } from 'firebase/auth';
 import TodayWeather from '../components/TodayWeather';
-import useClothes from './../hooks/useClothes';
 
 const authService = new AuthService();
 
 const Home = () => {
-  const clothes = useClothes();
-
   const [posts, setPosts] = useState<Post[]>([]);
   const [filter, setFilter] = useState({ date: '', city: '', temp: '' });
+  const [userId, setUserId] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const filtered = posts.filter((post) => {
     if (post.date.includes(filter.date) && post.city.includes(filter.city)) {
@@ -29,10 +28,6 @@ const Home = () => {
     }
     return undefined;
   });
-
-  const [userId, setUserId] = useState<string>('');
-
-  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const tags =
     posts.length < 1
@@ -79,7 +74,7 @@ const Home = () => {
   };
 
   return (
-    <div>
+    <div className='max-w-screen-lg mx-auto'>
       <Header onLogin={onLogin} onLogout={onLogout} userId={userId} />
       <TodayWeather isLoading={isLoading} />
       {userId ? (
@@ -89,12 +84,7 @@ const Home = () => {
           글을 작성하려면 로그인이 필요해요 :)
         </div>
       )}
-      <Filter
-        dates={dates}
-        posts={posts}
-        filter={filter}
-        setFilter={setFilter}
-      />
+      <Filter dates={dates} setFilter={setFilter} />
       <Board
         isLoading={isLoading}
         posts={filtered}

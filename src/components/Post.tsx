@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Post as PostInterface } from '../service/postsRepository';
 
 type Props = {
