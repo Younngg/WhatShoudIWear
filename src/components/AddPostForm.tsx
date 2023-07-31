@@ -69,7 +69,7 @@ const AddPostForm = ({ allHashtags, userId }: Props) => {
   }
 
   return (
-    <form className='add-post-form mb-5' onSubmit={onSubmitPost}>
+    <form className='text-sm mb-5' onSubmit={onSubmitPost}>
       <div className='flex mb-3 gap-2'>
         <input
           type='date'
@@ -117,8 +117,11 @@ const AddPostForm = ({ allHashtags, userId }: Props) => {
         setHashArr={setHashArr}
         allHashtags={allHashtags}
       />
-      {error && <div className='mt-2 error-message'>{error}</div>}
-      <button className='mt-2' type='submit'>
+      {error && <p className='mt-2 text-red-500'>{error}</p>}
+      <button
+        className='mt-2 text-sm bg-blue-500 text-white px-2 py-1 rounded-sm'
+        type='submit'
+      >
         작성하기
       </button>
     </form>
