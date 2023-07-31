@@ -7,14 +7,17 @@ type Props = {
 };
 
 const BUTTON_STYLE =
-  'w-20 h-8 flex items-center justify-center border-2 border-blue-500 rounded-md';
+  'w-20 h-8 flex items-center justify-center border border-blue-500 rounded-md text-sm';
 
 const Header = ({ onLogin, onLogout, userId }: Props) => {
   return (
     <header className='w-full h-16 flex items-center justify-between px-5'>
       <h1 className='text-2xl font-bold'>오늘 뭐 입지?</h1>
       {userId ? (
-        <button onClick={onLogout} className={BUTTON_STYLE}>
+        <button
+          onClick={onLogout}
+          className={`${BUTTON_STYLE} border-neutral-300`}
+        >
           로그아웃
         </button>
       ) : (

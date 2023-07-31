@@ -18,7 +18,7 @@ type FilterState = {
   temp: string;
 };
 
-const SELECT_STYLE = 'border border-blue-400 p-1 rounded-sm outline-none';
+const SELECT_STYLE = 'border p-1 rounded-sm outline-none text-sm';
 
 const Filter = ({ dates, setFilter }: Props) => {
   const onChangeFilter = (e: { target: { value: any; id: any } }) => {

@@ -87,22 +87,22 @@ const ClothesTag = ({ hashArr, setHashArr, allHashtags }: Props) => {
           />
         </div>
       </div>
-      <span>{error}</span>
-      <div className='border rounded-md w-full flex  flex-wrap'>
+      <span className='text-red-500'>{error}</span>
+      <ul className='border rounded-md w-full flex  flex-wrap'>
         {allHashtags
           .sort((a, b) => {
             return a.localeCompare(b);
           })
           .map((tag, index) => (
-            <div
+            <li
               key={index}
               className='px-3 py-1 m-1 border text-sky-500 w-fit rounded-full hover:bg-sky-500 hover:text-white hover:border-sky-500'
               onClick={onClickHashtag}
             >
               {tag}
-            </div>
+            </li>
           ))}
-      </div>
+      </ul>
     </>
   );
 };
